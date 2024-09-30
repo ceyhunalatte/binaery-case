@@ -47,15 +47,16 @@
               class="test absolute w-[156px] h-[195px] md:w-[332px] md:h-[412px] rounded-[8px] bg-gray-200 shadowed md:top-[-67px]" 
             />
             <!-- product card with information, variants and add to cart button -->
-            <div class='absolute sm:border-[0.77px] md:border-2 border-[rgba(204, 204, 204, 0.5)] top-[40px] right-[3px] w-[204px] h-[265px] md:w-[374px] md:h-[579px] rounded-[16px] bg-white p-4 md:py-[20px] md:px-[30px] shadowed'>
+            <div class='absolute border-[0.77px] md:border-2 border-[rgba(204, 204, 204, 0.5)] top-[40px] right-[3px] w-[204px] h-[265px] md:w-[374px] md:h-[579px] rounded-[16px] bg-white p-4 md:py-[20px] md:px-[30px] shadowed'>
               <div class='w-full h-full'>
                 <h3 
                   x-text="product.title"
                   class='bg-gradient-to-b text-transparent bg-clip-text from-[#A669EF] via-[#341087] to-[#341087] font-bold text-[19px] leading-[21px] md:text-[38px] md:leading-[50px]'>
                 </h3>
-                <p class="text-[#3D247A] text-[12px] leading-[16px] md:text-[16px] md:leading-[26px] line-clamp-4 md:line-clamp-none mt-[12px] md:mt-[20px]">
-                  The perfect boxy-fit sweater, The Boxy Sweater in Everyday Cotton is a layering essential. Featuring a chunky rib stitch at the crew neckline, along the hem, and sleeve cuffs, it has dropped shoulders for a relaxed edge. It’s made with 100% organic cotton, and designed to be styled solo or easily topped with a blazer or cardigan.
-                </p>
+                <p 
+                  x-text="product.description"
+                  class="text-[#3D247A] text-[12px] leading-[16px] md:text-[16px] md:leading-[26px] line-clamp-4 md:line-clamp-none mt-[12px] md:mt-[20px]"
+                >
                 <!-- variant select -->
                 <div class="text-[#341087] text-[14px] leading-[17px] md:text-[16px] mt-4 md:leading-[19px] md:mt-[30px]">                
                   <p>Color: <span x-text="selectedVariant.title"></span></p>
@@ -133,7 +134,7 @@
     <script>      
       window.addEventListener('DOMContentLoaded', async (event) => {
         // Fetch the product from server
-        const res = await fetch('https://binaery-case.vercel.app/store/getProduct?id=8598948872434')
+        const res = await fetch('http://localhost:3000/store/getProduct?id=8598948872434')
         if(!res) return
         const product = await res.json()
         
