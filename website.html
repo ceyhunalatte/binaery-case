@@ -136,7 +136,7 @@
     <script>      
       window.addEventListener('DOMContentLoaded', async (event) => {
         // Fetch the product from server
-        const res = await fetch('http://localhost:3000/store/getProduct?id=8598948872434')
+        const res = await fetch('https://binaery-case.vercel.app/store/getProduct?id=8598948872434')
         if(!res) return
         const product = await res.json()
         
