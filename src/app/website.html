@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link
+      href="https://fonts.cdnfonts.com/css/sf-pro-display"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <title>BINAERY | Case Study</title>
+  </head>
+
+  <body class="bg-white min-h-[100vh] h-[100vh] flex justify-center"> 
+    <!-- background -->
+    <div 
+      id='box-mask-container'
+      class="absolute h-[100vh] w-[90%] lg:w-[50vw] left-0 z-[-1] overflow-hidden"
+    >
+      <div id='boxes' class="absolute h-[100%] w-[100%] flex flex-wrap"></div>
+    </div>   
+
+    <!-- wait for content to load with this template -->
+    <template x-if="$store.shop?.product" x-init="">
+      <main id='main' class="h-full w-full flex flex-col lg:flex-row-reverse overflow-x-hidden overflow-y-scroll py-[28px] md:pt-[127px] lg:py-[60px] px-4 max-w-[1240px]">
+        <!-- product details section with image and info -->
+        <div  class="lg:w-[44%] flex justify-center items-center"
+          x-data="$store.shop"
+          
+        >
+          <div
+            id="product-container"
+            class="w-[298px] h-[299px] md:w-[575px] md:h-[620px] relative"
+            x-show="!!variantImage"
+          >
+            <!-- floating product image -->
+            <img 
+              id='product-image'
+              :src="$store.shop.variantImage"
+              class="test absolute w-[156px] h-[195px] md:w-[332px] md:h-[412px] rounded-[8px] bg-gray-200 shadowed md:top-[-67px]" 
+            />
+            <!-- product card with information, variants and add to cart button -->
+            <div class='absolute border-2 border-[rgba(204, 204, 204, 0.5)] top-[40px] right-[3px] w-[204px] h-[265px] md:w-[374px] md:h-[579px] rounded-[16px] bg-white p-4 md:py-[20px] md:px-[30px] shadowed'>
+              <div class='w-full h-full'>
+                <h3 
+                  x-text="product.title"
+                  class='bg-gradient-to-b text-transparent bg-clip-text from-[#A669EF] via-[#341087] to-[#341087] font-bold text-[19px] leading-[21px] md:text-[38px] md:leading-[50px]'>
+                </h3>
+                <p class="text-[#3D247A] text-[12px] leading-[16px] md:text-[16px] md:leading-[26px] line-clamp-4 md:line-clamp-none mt-[12px] md:mt-[20px]">
+                  The perfect boxy-fit sweater, The Boxy Sweater in Everyday Cotton is a layering essential. Featuring a chunky rib stitch at the crew neckline, along the hem, and sleeve cuffs, it has dropped shoulders for a relaxed edge. It’s made with 100% organic cotton, and designed to be styled solo or easily topped with a blazer or cardigan.
+                </p>
+                <!-- variant select -->
+                <div class="text-[#341087] text-[14px] leading-[17px] md:text-[16px] mt-4 md:leading-[19px] md:mt-[30px]">                
+                  <p>Color: <span x-text="selectedVariant.title"></span></p>
+                </div>
+                <div class="flex flex-row mt-2 md:mt-[10px] gap-[6px] md:gap-[10px]">
+                  <template x-for="variant in product.variants" :key="variant.id">
+                    <div 
+                      @click="selectVariant(variant)"
+                      class="cursor-pointer lg:size-[38px] flex items-center justify-center"
+                    >
+                      <div 
+                        class="rounded-full p-[2.5px] md:p-1 border inline-block" 
+                        :class="[selectedVariant.id === variant.id ? 'bg-[#E3FCEF] border-2 border-[#000]' : 'bg-white']"
+                      >
+                        <div 
+                          class="size-[14px] md:size-[26px] rounded-full"
+                          :class="variant.color"
+                        ></div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                <!-- add to cart button -->
+                <template x-if="selectedVariant.inventory_quantity >= 1">
+                  <button 
+                    id="add-to-cart-button" 
+                    class="text-[#fff] h-8 md:h-[50px] md:w-[315px] w-full rounded-full bg-[#341188] mt-4 md:mt-[48.5px] hover:bg-[#1D006A]"
+                    @click="addToCart"
+                  >
+                    <div>
+                      <p class='text-[14px] md:text-[22px] font-bold'>
+                        <span class="mr-[7px] md:mr-[12px]">Add to Cart</span>
+                        <span class="mr-[7px] md:mr-[12px]">|</span>
+                        <span>$</span>
+                        <span x-text="selectedVariant.price.replace('.00', '')"></span>
+                      </p>
+                    </div>
+                  </button>
+                </template>
+                <!-- out of stock -->
+                <template x-if="!selectedVariant.inventory_quantity">
+                  <div class="mt-4 md:mt-[48.5px] flex items-center justify-center">
+                    <p class='text-[14px] text-[#341087] md:text-[22px] font-bold'>
+                      Out of Stock
+                    </p>
+                  </div>
+                </template>
+              </div>
+            </div>
+            <!-- floating boxes -->
+            <img class="w-[10.69px] h-[14.96px] md:w-[21px] md:h-[29px] left-[-10px] bottom-[57px] md:left-[0px] md:bottom-[115px] absolute dollar-2" src="/dollar.png" />
+            <img class="w-[14.64px] h-[20.5px] md:w-[29px] md:h-[40px] left-[41px] md:left-[100px] bottom-[-21px] absolute dollar-1" src="/dollar.png" />
+            <div class="size-[22.6px] md:size-[45px] md:left-[21px] bottom-[10px] md:bottom-[40px] bg-[#7141AC] absolute rounded-[2.5px] md:rounded-[5px] shadowed-2 box-2"></div>
+            <div class="size-[37.6px] md:size-[75px] bottom-[38px] md:bottom-[95px] left-[29px] md:left-[76px] bg-[#CEA5FF] absolute rounded-[4px] md:rounded-[8px] shadowed z-[-1] box-1"></div>
+          </div>
+        </div>
+        <!-- intro section -->
+        <div class="lg:w-[56%] flex flex-col justify-center items-start">
+          <div class="mt-[91px] md:mt-[103px] lg:mt-0 lg:pb-[16px] md:max-w-[578px]">
+            <h1 class="bg-gradient-to-b text-transparent bg-clip-text from-[#A669EF] via-[#341087] to-[#341087] font-bold text-[36px] leading-[46px] md:text-[54px] md:leading-[64px]">
+              Start making money <br/> from your returns.
+            </h1>
+            <p class="text-[#3D247A] text-[16px] leading-[26px] md:text-[20px] md:leading-[30px] mt-[20px] md:mt-[30px]">
+              Built for Shopify merchants of all sizes.
+            </p>
+            <div class="flex items-center mt-[30px] md:mt-[37px]">
+              <button class='h-[34px] w-[152px] md:h-[46px] md:w-[173px] bg-[#4700ED] rounded-full flex items-center justify-center hover:bg-[#1D006A]'>
+                <img src="/shopify-icon.png" class="size-[15px]" />
+                <p class="text-white font-bold ml-[6px] text-[14px] md:text-[16px]">
+                  Install app now
+                </p>
+              </button>
+              <div class="h-[26px] md:h-[28px] w-[140px] ml-[20px] bg-[#E0F0FF] rounded-[8px] flex items-center justify-center">
+                <img src="/diamond.png" class="size-[18px]"/>
+                <p class="text-[#002133] text-[14px] font-bold ml-[4px]">
+                  Built for shopify
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </template>
+
+    <script src="/boxes.js"></script>   
+    <script src="/animateImage.js"></script>   
+    <script>      
+      window.addEventListener('DOMContentLoaded', async (event) => {
+        // Fetch the product from server
+        const res = await fetch('http://localhost:3000/store/getProduct?id=8598948872434')
+        if(!res) return
+        const product = await res.json()
+        
+        // Initiate store
+        Alpine.store('shop', {
+          product: null,
+          selectedVariant: null,
+          variantImage: null,
+        });
+        Alpine.start()
+
+        // Map the variant colors to correct ones
+        product.variants = product.variants.map(v => ({
+          ...v,
+          color: v.title === 'brown' ? 'bg-[#B88F6B]' : 'bg-[#575757]'
+        }))
+        // Set initial data
+        Alpine.store('shop').product = product
+        // Select the initial variant
+        selectVariant(product.variants[0])
+
+        // Register mouse move event for parallax image animation
+        window.addEventListener('mousemove', (e) => { 
+          animateImage(e)
+        })
+      })
+
+      // Initiate box animations
+      addBoxes()
+
+      // Refresh boxes on resize
+      window.addEventListener('resize', () => {
+        refreshBoxes()
+      })
+
+      // Select variant in alpine store on variant button press
+      function selectVariant(variant) {
+        variant.title = capitalizeFirstLetter(variant.title)
+        Alpine.store('shop').selectedVariant = variant
+        setVariantImage(variant)
+      }
+
+      // Set variant image in alpine store
+      function setVariantImage(variant) {
+        const images = Alpine.store('shop').product.images
+        const imageMeta = images?.find(x => x.variant_ids?.includes(variant.id))      
+        Alpine.store('shop').variantImage = imageMeta?.src || ''
+      }
+
+      // Capitalize first letter
+      function capitalizeFirstLetter(str) {
+        if(!str) return str
+        return str[0].toUpperCase() + str.slice(1, str.length)
+      }
+
+      function addToCart() {
+        const variantId = Alpine.store('shop').selectedVariant.id
+        window.open(`https://binaery-case.myshopify.com/cart/update?&updates[${variantId}]=1`)
+      }
+    </script>
+  </body>
+</html>

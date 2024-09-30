@@ -1,0 +1,137 @@
+:root {
+  font-family: 'SF Pro Display', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #000;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.shadowed {
+  box-shadow: 0px 30.53px 30.53px -12.21px rgba(50, 8, 106, 0.28);
+}
+
+.shadowed-2 {
+  box-shadow: 0px 30.53px 30.53px -12.21px rgba(50, 8, 106, 0.60);
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#boxes {
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  mask-repeat: no-repeat;
+}
+
+#box-mask-container {
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  mask-repeat: no-repeat;
+}
+
+.box {
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  border-radius: 2px;
+  background-color: #CEA5FF;
+}
+
+.animate-box {
+  animation: boxAnimation 6s ease-in-out infinite;
+}
+
+.box-1 {
+  animation: moveUpDownBox1 9s ease-in-out infinite;
+}
+
+.box-2 {
+  animation: moveUpDownBox2 9s ease-in-out infinite;
+}
+
+.dollar-1 {
+  animation: moveUpDownDollar1 9s ease-in-out infinite;
+}
+
+.dollar-2 {
+  animation: moveUpDownDollar2 9s ease-in-out infinite;
+}
+
+@media screen and (max-width: 640px) {
+  .box-1 {
+    animation: moveUpDownBox1Narrow 9s ease-in-out infinite;
+  }
+  
+  .box-2 {
+    animation: moveUpDownBox2Narrow 9s ease-in-out infinite;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .box {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .box {
+    width: 55px !important;
+    height: 55px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .box {
+    width: 80px !important;
+    height: 80px;
+  }
+}
+
+@keyframes moveUpDownBox1 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes moveUpDownBox2 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(20px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes moveUpDownBox1Narrow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes moveUpDownBox2Narrow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes moveUpDownDollar1 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes moveUpDownDollar2 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes boxAnimation {
+  0% { opacity: 0; }
+  50% { opacity: 1 }
+  100% { opacity: 0 }
+}
