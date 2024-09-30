@@ -8,6 +8,7 @@ export async function GET(request) {
 
   const session = await shopify();
   const product = await getProduct(session, productId);
+  product.description = product.body_html.replace(/(<([^>]+)>)/gi, '');
   if (!product) return Response.json(404);
 
   return Response.json(product);

@@ -7,6 +7,7 @@ export async function getProduct(client, id) {
 
     return response.body.products[0];
   } catch (error) {
-    return error;
+    console.error('Error fetching product:', error);
+    return false;
   }
 }
