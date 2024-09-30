@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -18,7 +18,7 @@
     <title>BINAERY | Case Study</title>
   </head>
 
-  <body class="bg-white flex justify-center h-[100vh]"> 
+  <body class="bg-white flex justify-center h-[100vh] w-[100vw]"> 
     <!-- background -->
     <div 
       id='box-mask-container'
@@ -28,8 +28,8 @@
     </div>   
 
     <!-- wait for content to load with this template -->
-    <template x-if="$store.shop?.product" x-init=""  >
-      <main id='main' class="h-full w-full flex flex-col lg:flex-row-reverse overflow-x-hidden py-[28px] md:pt-[127px] lg:py-[60px] px-4 max-w-[1240px]">
+    <template x-if="$store.shop?.product" x-init="">
+      <main id='main' class="h-full w-full flex flex-col lg:flex-row-reverse py-[28px] md:pt-[127px] lg:py-[60px] px-4 max-w-[1240px]">
         <!-- product details section with image and info -->
         <div 
           x-data="$store.shop" 
@@ -136,7 +136,7 @@
     <script>      
       window.addEventListener('DOMContentLoaded', async (event) => {
         // Fetch the product from server
-        const res = await fetch('https://binaery-case.vercel.app/store/getProduct?id=8598948872434')
+        const res = await fetch('http://localhost:3000/store/getProduct?id=8598948872434')
         if(!res) return
         const product = await res.json()
         
