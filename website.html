@@ -18,18 +18,18 @@
     <title>BINAERY | Case Study</title>
   </head>
 
-  <body class="bg-white min-h-[100vh] h-[100vh] flex justify-center"> 
+  <body class="bg-white flex justify-center h-[100vh]"> 
     <!-- background -->
     <div 
       id='box-mask-container'
-      class="absolute h-[100vh] w-[90%] lg:w-[50vw] left-0 z-[-1] overflow-hidden"
+      class="overflow-hidden absolute h-[100vh] w-[90%] lg:w-[50vw] left-0 z-[-1]"
     >
       <div id='boxes' class="absolute h-[100%] w-[100%] flex flex-wrap"></div>
     </div>   
 
     <!-- wait for content to load with this template -->
-    <template x-if="$store.shop?.product" x-init="">
-      <main id='main' class="h-full w-full flex flex-col lg:flex-row-reverse overflow-x-hidden overflow-y-scroll py-[28px] md:pt-[127px] lg:py-[60px] px-4 max-w-[1240px]">
+    <template x-if="$store.shop?.product" x-init=""  >
+      <main id='main' class="h-full w-full flex flex-col lg:flex-row-reverse overflow-x-hidden py-[28px] md:pt-[127px] lg:py-[60px] px-4 max-w-[1240px]">
         <!-- product details section with image and info -->
         <div 
           x-data="$store.shop" 
