@@ -133,8 +133,14 @@
     <script src="/animateImage.js"></script>   
     <script>      
       window.addEventListener('DOMContentLoaded', async (event) => {
+        const baseURL = window.location.href.includes('localhost')
+          ? 'http://localhost:3000/'
+          : 'https://binaery-case.vercel.app/'
         // Fetch the product from server
-        const res = await fetch('http://localhost:3000/store/getProduct?id=8598948872434')
+        const res = await fetch(
+          baseURL 
+          + 'store/getProduct?id=8598948872434'
+        )
         if(!res) return
         const product = await res.json()
         
