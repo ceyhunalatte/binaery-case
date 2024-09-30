@@ -47,7 +47,7 @@
               class="test absolute w-[156px] h-[195px] md:w-[332px] md:h-[412px] rounded-[8px] bg-gray-200 shadowed md:top-[-67px]" 
             />
             <!-- product card with information, variants and add to cart button -->
-            <div class='absolute border-2 border-[rgba(204, 204, 204, 0.5)] top-[40px] right-[3px] w-[204px] h-[265px] md:w-[374px] md:h-[579px] rounded-[16px] bg-white p-4 md:py-[20px] md:px-[30px] shadowed'>
+            <div class='absolute sm:border-[0.77px] md:border-2 border-[rgba(204, 204, 204, 0.5)] top-[40px] right-[3px] w-[204px] h-[265px] md:w-[374px] md:h-[579px] rounded-[16px] bg-white p-4 md:py-[20px] md:px-[30px] shadowed'>
               <div class='w-full h-full'>
                 <h3 
                   x-text="product.title"
@@ -87,10 +87,7 @@
                   >
                     <div>
                       <p class='text-[14px] md:text-[22px] font-bold'>
-                        <span class="mr-[7px] md:mr-[12px]">Add to Cart</span>
-                        <span class="mr-[7px] md:mr-[12px]">|</span>
-                        <span>$</span>
-                        <span x-text="selectedVariant.price.replace('.00', '')"></span>
+                        <span class="mr-[7px] md:mr-[12px]">Add to Cart</span><span class="mr-[7px] md:mr-[12px]">|</span><span>$</span><span x-text="selectedVariant.price.replace('.00', '')"></span>
                       </p>
                     </div>
                   </button>
