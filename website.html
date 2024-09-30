@@ -31,9 +31,9 @@
     <template x-if="$store.shop?.product" x-init="">
       <main id='main' class="h-full w-full flex flex-col lg:flex-row-reverse overflow-x-hidden overflow-y-scroll py-[28px] md:pt-[127px] lg:py-[60px] px-4 max-w-[1240px]">
         <!-- product details section with image and info -->
-        <div  class="lg:w-[44%] flex justify-center items-center"
-          x-data="$store.shop"
-          
+        <div 
+          x-data="$store.shop" 
+          class="lg:w-[44%] flex justify-center items-center"
         >
           <div
             id="product-container"
@@ -79,11 +79,11 @@
                   </template>
                 </div>
                 <!-- add to cart button -->
-                <template x-if="selectedVariant.inventory_quantity >= 1">
                   <button 
                     id="add-to-cart-button" 
-                    class="text-[#fff] h-8 md:h-[50px] md:w-[315px] w-full rounded-full bg-[#341188] mt-4 md:mt-[48.5px] hover:bg-[#1D006A]"
+                    class="text-[#fff] h-8 md:h-[50px] md:w-[315px] w-full rounded-full bg-[#341188] mt-4 md:mt-[48.5px] enabled:hover:bg-[#1D006A] disabled:opacity-60"
                     @click="addToCart"
+                    x-bind:disabled="!selectedVariant.inventory_quantity"
                   >
                     <div>
                       <p class='text-[14px] md:text-[22px] font-bold'>
@@ -94,15 +94,6 @@
                       </p>
                     </div>
                   </button>
-                </template>
-                <!-- out of stock -->
-                <template x-if="!selectedVariant.inventory_quantity">
-                  <div class="mt-4 md:mt-[48.5px] flex items-center justify-center">
-                    <p class='text-[14px] text-[#341087] md:text-[22px] font-bold'>
-                      Out of Stock
-                    </p>
-                  </div>
-                </template>
               </div>
             </div>
             <!-- floating boxes -->

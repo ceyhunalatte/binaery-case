@@ -1,4 +1,4 @@
-function getBoxDimension() {
+function getBoxDimensions() {
   const docW = document.body.offsetWidth;
 
   switch (true) {
@@ -14,7 +14,7 @@ function getBoxDimension() {
 function addBoxes() {
   const parent = document.getElementById('boxes');
   const area = parent.getBoundingClientRect();
-  const boxW = getBoxDimension();
+  const boxW = getBoxDimensions();
 
   const x = area.width / boxW;
   const y = area.height / boxW;
