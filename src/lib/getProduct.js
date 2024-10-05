@@ -1,11 +1,10 @@
 export async function getProduct(client, id) {
   try {
     const response = await client.get({
-      path: 'products',
-      id,
+      path: `products/${id}`,
     });
 
-    return response.body.products[0];
+    return response.body.product;
   } catch (error) {
     console.error('Error fetching product:', error);
     return false;

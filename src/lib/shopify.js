@@ -1,5 +1,4 @@
 import '@shopify/shopify-api/adapters/node';
-
 import { shopifyApi } from '@shopify/shopify-api';
 
 export async function shopify() {
